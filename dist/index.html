@@ -1,0 +1,111 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Platinum Bridge</title>
+  <script>
+    // TODO: Need the script to interact with pbcoin index.html
+    // TODO: Increment coin count with html page component
+    // TODO: Need to check 'coupon code' for coin purchase
+    // TODO: Write the math for final purchase total
+    // TODO: addItemToCart(name, price, count)
+    // TODO: removeItemFromCart(name)
+    // TODO: removeAllItemsFromCart(name)
+    // TODO: clearCartOut();
+    // TODO: countAllItemsInCart() -> return number of items in the cart
+    // TODO: totalCartCost()       -> return the total cost of the items in cart
+    // TODO: listCart()            -> array of items
+    // TODO: saveCart()            -> save instance of cart on local storage...server side. Cookies.
+    // TODO: loadCart()            -> load saved cart
+
+    var cart = [];
+    var name = "pbcoin";
+    var price = .10; // price of token could change in value
+    var count = 0;
+    var total = 0;
+
+    var Item = function(name, price, count) {
+      this.name = name
+      this.price = price
+      this.count = count
+      this.total = total
+    };
+
+    function addItemToCart(name, price, count) { // this is adding the initial item to the cart
+      total = price * count;
+      var item = new Item(name, price, count);
+      cart.push(item);
+    }
+
+    function addOneItemToCart() { // this will increment one item per click of the '+' button
+      if(cart[0].count >= 0) {
+        cart[0].count++;
+        cart[0].total = cart[0].count * price;
+      }
+
+    }
+
+    function removeOneItemFromCart() { // access the count variable and decrement by 1 when '-' button is clicked
+      if(cart[0].count > 0) {
+        cart[0].count--;
+        cart[0].total = (cart[0].count - 1) * price;
+      }
+      else {
+        console.log("Cart is already empty...can't remove anymore coins.");
+      }
+
+    }
+
+    function removeAllItemsFromCart() { // removes everything from the cart
+      if(cart[0].count != 0) {
+        cart[0].count = 0;
+        cart[0].total = 0;
+      }
+      else {
+        console.log("Cart is already empty.")
+      }
+    }
+
+    // taking remaining coins in cart and adding a specified number back to the cart
+    // this would be the function for the amount picker
+    function addBackToCart(count) {
+      var previousCount = cart[0].count;
+      cart[0].count = count + previousCount;
+      cart[0].total = cart[0].count * price;
+    }
+
+    addItemToCart(name, price, 1000);
+    console.log("Added intial coins to the cart " + cart[0].count + " " + cart[0].total);
+    removeOneItemFromCart();
+    console.log("Removed 1 coin from cart " + cart[0].count + " " + cart[0].total);
+    removeOneItemFromCart();
+    console.log("Removed 1 coin from cart " + cart[0].count + " " + cart[0].total);
+    addOneItemToCart();
+    console.log("Added a coin to the cart " + cart[0].count + " " + cart[0].total);
+    removeAllItemsFromCart();
+    console.log("All items removed " + cart[0].count + " " + cart[0].total)
+    removeAllItemsFromCart();
+    addOneItemToCart();
+    console.log("Added a coin to the cart " + cart[0].count + " " + cart[0].total);
+    addBackToCart(134);
+    console.log("Added coins to the cart " + cart[0].count + " " + cart[0].total)
+
+  </script>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+</body>
+
+</html>
